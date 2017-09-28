@@ -6,7 +6,7 @@ import ImageMagnifierLensState from './IImageMagnifierLensState';
 import IOffset from './IOffset';
 
 export class Magnifier extends React.Component<MagnifierProps, {}> {
-    render (): React.ReactElement<MagnifierProps> {
+    public render (): React.ReactElement<MagnifierProps> {
         let props = this.props;
         let halfSize = props.size / 2;
         let magX = props.zoomImage.width / props.smallImage.width;
@@ -58,7 +58,7 @@ export class ImageMagnifierLens extends React.Component<ImageMagnifierLensProps,
         });
     }
 
-    componentDidMount() {
+    public componentDidMount() {
         document.addEventListener('mousemove', this.onMouseMove);
         if (!this.portalElement) {
             this.portalElement = document.createElement('div');
@@ -67,13 +67,13 @@ export class ImageMagnifierLens extends React.Component<ImageMagnifierLensProps,
         this.componentDidUpdate();
     }
 
-    componentWillUnmount() {
+    public componentWillUnmount() {
         document.removeEventListener('mousemove', this.onMouseMove);
         document.body.removeChild(this.portalElement);
         this.portalElement = null;
     }
 
-    onMouseMove = (e: any) => {
+    public onMouseMove = (e: any) => {
         var offset = this.getOffset(ReactDOM.findDOMNode(this));
 
         this.setState({
@@ -84,7 +84,7 @@ export class ImageMagnifierLens extends React.Component<ImageMagnifierLensProps,
         });
     }
 
-    componentDidUpdate() {
+    public componentDidUpdate() {
         ReactDOM.render(<Magnifier
             size={this.props.size}
             smallImage={this.props.image}
@@ -106,7 +106,7 @@ export class ImageMagnifierLens extends React.Component<ImageMagnifierLensProps,
         return { x, y };
     }
     
-    render () {
+    public render () {
         return (
             <img {...this.props} src={this.props.image.src} />
         );
